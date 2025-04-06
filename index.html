@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifting Beam Inspection Form</title>
+    <link rel="stylesheet" href="./style.css">
+    <!-- Load external libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/4.1.5/signature_pad.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="reports-header">
+        <h1>Lifting Beam Inspection Form</h1>
+        <div class="user-info">
+            Logged in as: <span id="userInfo"></span>
+            <button id="logoutBtn" class="logout-btn">Logout</button>
+        </div>
+    </div>
+
+    <div class="reports-nav">
+        <a href="./index.html" class="active">Inspection Form</a>
+        <a href="./reports.html">Reports</a>
+        <a href="./admin.html" class="admin-only">User Management</a>
+    </div>
+    
+    <div class="form-container" id="inspectionForm">
+        <h2 class="text-center">LIFTING BEAM INSPECTION FORM</h2>
+        
+        <form id="liftingBeamForm">
+            <table>
+                <tr>
+                    <th colspan="4" rowspan="2">Name and Address of Owner of the Lifting Beam:</th>
+                    <th colspan="4">Date of Inspection:</th>
+                </tr>
+                <tr>
+                    <th colspan="4">
+                        <input type="date" id="inspectionDate" name="inspectionDate">
+                    </th>
+                </tr>
+                <tr>
+                    <td colspan="4" rowspan="2">
+                        <textarea id="ownerDetails" name="ownerDetails" rows="3"></textarea>
+                    </td>
+                    <td colspan="4">Contact Person:</td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <input type="text" id="contactPerson" name="contactPerson">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">Previous Examination Date:</td>
+                    <td colspan="4">Contact Number:</td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <input type="date" id="prevExamDate" name="prevExamDate">
+                    </td>
+                    <td colspan="4">
+                        <input type="tel" id="contactNumber" name="contactNumber">
+                    </td>
+                </tr>
+                <tr class="header-row">
+                    <td colspan="4">Description of Lifting Beam</td>
+                    <td colspan="4">Manufactured / Fabricated By:</td>
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                    <td colspan="4">
+                        <input type="text" id="manufacturer" name="manufacturer">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><strong>Beam Details</strong></td>
+                    <td colspan="2"><strong>Lifting pad Details</strong></td>
+                    <td colspan="4">Year of Manufacturing:</td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td colspan="2"></td>
+                    <td colspan="4">
+                        <input type="text" id="yearManufacturing" name="yearManufacturing">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">Model/Type:</td>
+                    <td colspan="2">No of Lifting pad:</td>
+                    <td colspan="4">Model/Type:</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="text" id="beamModel" name="beamModel">
+                    </td>
+                    <td colspan="2">
+                        <input type="text" id="liftingPadNo" name="liftingPadNo">
+                    </td>
+                    <td colspan="4">
+                        <input type="text" id="equipModel" name="equipModel">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">Length:</td>
+                    <td colspan="2">Length:</td>
+                    <td colspan="4">Serial No.:</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="text" id="beamLength" name="beamLength">
+                    </td>
+                    <td colspan="2">
+                        <input type="text" id="padLength" name="padLength">
+                    </td>
+                    <td colspan="4">
+                        <input type="text" id="serialNo" name="serialNo">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">Width:</td>
+                    <td colspan="2">Width:</td>
+                    <td colspan="4">Thorough Examination Type</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="text" id="beamWidth" name="beamWidth">
+                    </td>
+                    <td colspan="2">
+                        <input type="text" id="padWidth" name="padWidth">
+                    </td>
+                    <td colspan="4">
+                        <div class="radio-container">
+                            <div class="radio-option">
+                                <input type="radio" id="typeInitial" name="examType" value="Initial">
+                                <label for="typeInitial">Initial</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="typeMajor" name="examType" value="Major">
+                                <label for="typeMajor">Major</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="typePeriodic" name="examType" value="Periodic">
+                                <label for="typePeriodic">Periodic</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">Height:</td>
+                    <td colspan="2">Height:</td>
+                    <td colspan="4">Is this the first examination? 
+                        <div class="radio-container">
+                            <div class="radio-option">
+                                <input type="radio" id="firstExamYes" name="firstExam" value="Yes">
+                                <label for="firstExamYes">YES</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="firstExamNo" name="firstExam" value="No">
+                                <label for="firstExamNo">NO</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="text" id="beamHeight" name="beamHeight">
+                    </td>
+                    <td colspan="2">
+                        <input type="text" id="padHeight" name="padHeight">
+                    </td>
+                    <td colspan="4" rowspan="2">If the answer is YES has the equipment installed correctly 
+                        <div class="radio-container">
+                            <div class="radio-option">
+                                <input type="radio" id="installedYes" name="installedCorrectly" value="Yes">
+                                <label for="installedYes">YES</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="installedNo" name="installedCorrectly" value="No">
+                                <label for="installedNo">NO</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">Thickness:</td>
+                    <td colspan="2">Thickness:</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="text" id="beamThickness" name="beamThickness">
+                    </td>
+                    <td colspan="2">
+                        <input type="text" id="padThickness" name="padThickness">
+                    </td>
+                    <td colspan="4" rowspan="2">Was the examination carried out within the interval of?
+                        <div class="radio-container">
+                            <div class="radio-option">
+                                <input type="radio" id="interval6" name="interval" value="6 Months">
+                                <label for="interval6">6 Months</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="interval12" name="interval" value="12 Months">
+                                <label for="interval12">12 Months</label>
+                            </div>
+                        </div>
+                        <div class="radio-container">
+                            <div class="radio-option">
+                                <input type="radio" id="intervalScheme" name="interval" value="Examination scheme">
+                                <label for="intervalScheme">In Accordance of examination scheme</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="intervalExceptional" name="interval" value="Exceptional">
+                                <label for="intervalExceptional">After exceptional circumstances</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">Diameter:</td>
+                    <td colspan="2">Diameter:</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="text" id="beamDiameter" name="beamDiameter">
+                    </td>
+                    <td colspan="2">
+                        <input type="text" id="padDiameter" name="padDiameter">
+                    </td>
+                    <td colspan="4"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">Equip. used for Insp.:</td>
+                    <td colspan="4" rowspan="2">Identification of any part found to have defect which could become a danger to persons and a description of defect:<br>(If none, state NONE)
+                        <textarea id="defectDescription" name="defectDescription" rows="3"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <input type="text" id="equipUsed" name="equipUsed">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8">Place of Survey:
+                        <input type="text" id="placeSurvey" name="placeSurvey">
+                    </td>
+                </tr>
+            </table>
+
+            <table>
+                <tr class="header-row">
+                    <td>S/N</td>
+                    <td colspan="2">SECTION</td>
+                    <td>REMARKS</td>
+                    <td colspan="4">Notes</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td colspan="2">Manufacturer / Fabrication Details</td>
+                    <td>
+                        <select id="section1" name="section1">
+                            <option value="S">Satisfactory (S)</option>
+                            <option value="F">Finding (F)</option>
+                            <option value="CF">Critical Finding (CF)</option>
+                        </select>
+                    </td>
+                    <td colspan="4" rowspan="3">Particulars of test carried out as part of the examination?:
+                        <textarea id="testParticulars" name="testParticulars" rows="3"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td colspan="2">Design & Drawings</td>
+                    <td>
+                        <select id="section2" name="section2">
+                            <option value="S">Satisfactory (S)</option>
+                            <option value="F">Finding (F)</option>
+                            <option value="CF">Critical Finding (CF)</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td colspan="2">Bend</td>
+                    <td>
+                        <select id="section3" name="section3">
+                            <option value="S">Satisfactory (S)</option>
+                            <option value="F">Finding (F)</option>
+                            <option value="CF">Critical Finding (CF)</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td colspan="2">Stretch</td>
+                    <td>
+                        <select id="section4" name="section4">
+                            <option value="S">Satisfactory (S)</option>
+                            <option value="F">Finding (F)</option>
+                            <option value="CF">Critical Finding (CF)</option>
+                        </select>
+                    </td>
+                    <td colspan="4" rowspan="2">Any recommendation from last report?:
+                        <textarea id="lastReportRec" name="lastReportRec" rows="3"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td colspan="2">Damage due to Corrosion</td>
+                    <td>
+                        <select id="section5" name="section5">
+                            <option value="S">Satisfactory (S)</option>
+                            <option value="F">Finding (F)</option>
+                            <option value="CF">Critical Finding (CF)</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td colspan="2">Damage due to Wear</td>
+                    <td>
+                        <select id="section6" name="section6">
+                            <option value="S">Satisfactory (S)</option>
+                            <option value="F">Finding (F)</option>
+                            <option value="CF">Critical Finding (CF)</option>
+                        </select>
+                    </td>
+                    <td colspan="4" rowspan="2">Reviewed any documents with references?:
+                        <textarea id="reviewedDocs" name="reviewedDocs" rows="3"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td colspan="2">Damage due to Cracks</td>
+                    <td>
+                        <select id="section7" name="section7">
+                            <option value="S">Satisfactory (S)</option>
+                            <option value="F">Finding (F)</option>
+                            <option value="CF">Critical Finding (CF)</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td colspan="2">Damage due to Metal Flaking</td>
+                    <td>
+                        <select id="section8" name="section8">
+                            <option value="S">Satisfactory (S)</option>
+                            <option value="F">Finding (F)</option>
+                            <option value="CF">Critical Finding (CF)</option>
+                        </select>
+                    </td>
+                    <td colspan="4">NDT Required?:
+                        <div class="radio-container">
+                            <div class="radio-option">
+                                <input type="radio" id="ndtYes" name="ndtRequired" value="Yes">
+                                <label for="ndtYes">YES</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="ndtNo" name="ndtRequired" value="No">
+                                <label for="ndtNo">NO</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td colspan="2">Damage due to Hole</td>
+                    <td>
+                        <select id="section9" name="section9">
+                            <option value="S">Satisfactory (S)</option>
+                            <option value="F">Finding (F)</option>
+                            <option value="CF">Critical Finding (CF)</option>
+                        </select>
+                    </td>
+                    <td>Safe Working Load (kg)</td>
+                    <td>Test Load (kg)</td>
+                    <td colspan="2">Proof Load (kg)</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td colspan="2">Lifting Pad</td>
+                    <td>
+                        <select id="section10" name="section10">
+                            <option value="S">Satisfactory (S)</option>
+                            <option value="F">Finding (F)</option>
+                            <option value="CF">Critical Finding (CF)</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" id="safeWorkingLoad" name="safeWorkingLoad">
+                    </td>
+                    <td>
+                        <input type="text" id="testLoad" name="testLoad">
+                    </td>
+                    <td colspan="2">
+                        <input type="text" id="proofLoad" name="proofLoad">
+                    </td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td colspan="2">Welding Joints / NDT</td>
+                    <td>
+                        <select id="section11" name="section11">
+                            <option value="S">Satisfactory (S)</option>
+                            <option value="F">Finding (F)</option>
+                            <option value="CF">Critical Finding (CF)</option>
+                        </select>
+                    </td>
+                    <td colspan="4">Type of Finding</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td colspan="2">General Condition</td>
+                    <td>
+                        <select id="section12" name="section12">
+                            <option value="S">Satisfactory (S)</option>
+                            <option value="F">Finding (F)</option>
+                            <option value="CF">Critical Finding (CF)</option>
+                        </select>
+                    </td>
+                    <td colspan="2">Minor Finding (MF)
+                        <input type="checkbox" id="minorFinding" name="minorFinding">
+                    </td>
+                    <td colspan="2">Critical Finding (CF)
+                        <input type="checkbox" id="criticalFinding" name="criticalFinding">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8"><strong>Finding Details/Target Date:</strong>
+                        <textarea id="findingDetails" name="findingDetails" rows="3"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>Next Inspection Due On:</strong>
+                        <input type="date" id="nextInspectionDate" name="nextInspectionDate">
+                    </td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">Name of the Person Making This Report:
+                        <input type="text" id="inspectorName" name="inspectorName">
+                    </td>
+                    <td colspan="5">Client Representative Receiving This Report:
+                        <input type="text" id="clientRepName" name="clientRepName">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">Signature:
+                        <div class="signature-container">
+                            <div class="signature-placeholder" id="inspectorPlaceholder">Sign here</div>
+                            <canvas id="inspectorSignature"></canvas>
+                        </div>
+                        <button type="button" id="clearInspectorSignature" class="clear-btn">Clear Signature</button>
+                    </td>
+                    <td colspan="5">Signature:
+                        <div class="signature-container">
+                            <div class="signature-placeholder" id="clientPlaceholder">Sign here</div>
+                            <canvas id="clientSignature"></canvas>
+                        </div>
+                        <button type="button" id="clearClientSignature" class="clear-btn">Clear Signature</button>
+                    </td>
+                </tr>
+            </table>
+            
+            <div class="footer">
+                E-mail: info@kakacast.com /// P.O BOX: 3696, Al Qusais, Dubai, Tel: +971 4 3267877 /// Web Site: www.kakacast.com
+            </div>
+        </form>
+        
+        <div class="button-group">
+            <button type="button" id="submitBtn">Submit Form</button>
+            <button type="button" id="downloadPdfBtn">Download as PDF</button>
+            <button type="button" id="resetBtn">Reset Form</button>
+        </div>
+    </div>
+
+    <!-- Include external JavaScript file -->
+    <script src="./script.js"></script>
+</body>
+</html>
