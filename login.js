@@ -1,48 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Lifting Beam Inspection Form</title>
-    <link rel="stylesheet" href="aligned-login.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-        <div class="login-container">
-            <div class="header">
-                <h1>Lifting Beam Inspection Form</h1>
-                <p>Please login to continue</p>
-            </div>
-            
-            <form id="loginForm" class="login-form">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                </div>
-                
-                <div class="remember-forgot">
-                    <div class="remember-me">
-                        <input type="checkbox" id="remember" name="remember">
-                        <label for="remember">Remember me</label>
-                    </div>
-                    <a href="#" class="forgot-password">Forgot password?</a>
-                </div>
-                
-                <button type="submit" class="login-btn">Login</button>
-            </form>
-            
-            <div class="login-footer">
-                <p>Don't have an account? <a href="#">Contact administrator</a></p>
-            </div>
-        </div>
-    </div>
-
-    <script src="js/login.js"></script>
-</body>
-</html>
+document.addEventListener('DOMContentLoaded', function() {
+    // Form submission
+    const loginForm = document.getElementById('loginForm');
+    
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const remember = document.getElementById('remember') ? document.getElementById('remember').checked : false;
+        
+        // Basic validation
+        if (!username || !password) {
+            alert('Please enter both username and password.');
+            return;
+        }
+        
+        // For demonstration purposes, we're using simple client-side authentication
+        // In a real application, this would be handled securely on the server
+        
+        // Store authentication status
+        if (remember) {
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('username', username);
+        } else {
+            sessionStorage.setItem('isLoggedIn', 'true');
+            sessionStorage.setItem('username', username);
+        }
+        
+        // Redirect to main page
+        window.location.href = 'index.html';
+    });
+    
+    // Check if already logged in
+    const isLoggedIn = localStorage.getItem('isLoggedIn') || sessionStorage.getItem('isLoggedIn');
+    if (isLoggedIn) {
+        window.location.href = 'index.html';
+    }
+    
+    // Populate remembered username if exists
+    const rememberedUser = localStorage.getItem('username');
+    if (rememberedUser && document.getElementById('username')) {
+        document.getElementById('username').value = rememberedUser;
+        if (document.getElementById('remember')) {
+            document.getElementById('remember').checked = true;
+        }
+    }
+});
